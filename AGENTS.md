@@ -50,9 +50,9 @@ Backlog MCP Server は、Model Context Protocol (MCP) を使用して Backlog AP
 
 ## 環境変数
 
-- `BACKLOG_API_TOKEN`: Backlog API の認証トークン（必須）
-- `BACKLOG_SPACE`: Backlog のスペース ID（必須）
-  - 例: `https://your-space.backlog.jp` の場合、`your-space` を指定
+- `BACKLOG_API_KEY`: Backlog API の認証トークン（必須）
+- `BACKLOG_DOMAIN`: Backlog のドメイン（必須）
+  - 例: `https://your-space.backlog.jp` の場合、`your-space.backlog.jp` を指定
 
 ## 使用方法
 
@@ -74,8 +74,8 @@ Backlog MCP Server は、Model Context Protocol (MCP) を使用して Backlog AP
       "command": "npx",
       "args": ["-y", "https://github.com/pj8/backlog-mcp-server"],
       "env": {
-        "BACKLOG_API_TOKEN": "****",
-        "BACKLOG_SPACE": "your-space-here"
+        "BACKLOG_API_KEY": "****",
+        "BACKLOG_DOMAIN": "your-space-here.backlog.jp"
       },
       "transportType": "stdio"
     }
@@ -112,7 +112,7 @@ try {
 ### API クライアントの初期化
 
 ```typescript
-const baseURL = `https://${space}.backlog.jp`;
+const baseURL = domain.startsWith("http") ? domain : `https://${domain}`;
 this.client = axios.create({
   baseURL,
   params: {

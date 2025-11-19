@@ -14,13 +14,13 @@ import type {
 
 export class BacklogClient {
   private client;
-  private space: string;
+  private domain: string;
 
-  constructor(apiToken: string, space: string) {
-    this.space = space;
+  constructor(apiToken: string, domain: string) {
+    this.domain = domain;
     
-    // スペースのドメインからURLを作成
-    const baseURL = `https://${space}.backlog.jp`;
+    // ドメインからURLを作成（プロトコルが含まれていない場合は追加）
+    const baseURL = domain.startsWith('http') ? domain : `https://${domain}`;
     
     this.client = axios.create({
       baseURL,

@@ -4,17 +4,17 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { BacklogClient } from './client.js';
 
-// 環境変数から設定を取得、または引数で指定されたAPIトークンとスペース名を使用
-const API_TOKEN = process.env.BACKLOG_API_TOKEN;
-const SPACE = process.env.BACKLOG_SPACE;
+// 環境変数から設定を取得、または引数で指定されたAPIトークンとドメインを使用
+const API_TOKEN = process.env.BACKLOG_API_KEY;
+const DOMAIN = process.env.BACKLOG_DOMAIN;
 
-if (!API_TOKEN || !SPACE) {
-  console.error('環境変数 BACKLOG_API_TOKEN と BACKLOG_SPACE を設定してください');
+if (!API_TOKEN || !DOMAIN) {
+  console.error('環境変数 BACKLOG_API_KEY と BACKLOG_DOMAIN を設定してください');
   process.exit(1);
 }
 
 // Backlog APIクライアントの初期化
-const backlogClient = new BacklogClient(API_TOKEN, SPACE);
+const backlogClient = new BacklogClient(API_TOKEN, DOMAIN);
 
 // MCPサーバーを作成
 const server = new McpServer({
@@ -176,7 +176,7 @@ async function start() {
   try {
     const transport = new StdioServerTransport();
     await server.connect(transport);
-    console.error(`Backlog MCP Server ready (Space: ${SPACE})`);
+    console.error(`Backlog MCP Server ready (Domain: ${DOMAIN})`);
     console.error(`Available tools: get_issue, get_issue_comments, get_issue_attachments, get_issue_attachment, get_issue_shared_files`);
   } catch (error) {
     console.error('Error starting server:', error);

@@ -20,8 +20,8 @@
   <img width="1064" alt="Screenshot 2025-04-18 at 11 56 28" src="https://github.com/user-attachments/assets/783b72a0-ba0f-4769-8222-d5754d48573d" />
 
 - 下記のように backlog-mcp-server の設定を追加します。
-  - BACKLOG_API_TOKEN は、https://your-space-here.backlog.jp/EditApiSettings.action
-  - BACKLOG_SPACE は、 https://your-space-here.backlog.jp ならば、your-space-here です
+  - BACKLOG_API_KEY は、https://your-space.backlog.jp/EditApiSettings.action
+  - BACKLOG_DOMAIN は、 https://your-space.backlog.jp ならば、your-space.backlog.jp です
 
 ```jsonc
 {
@@ -40,8 +40,8 @@
       "command": "npx",
       "args": ["-y", "https://github.com/pj8/backlog-mcp-server"],
       "env": {
-        "BACKLOG_API_TOKEN": "****",
-        "BACKLOG_SPACE": "your-space-here"
+        "BACKLOG_DOMAIN": "your-space.backlog.jp",
+        "BACKLOG_API_KEY": "****"
       },
       "transportType": "stdio"
     }
