@@ -15,7 +15,7 @@ Backlog MCP Server は、Model Context Protocol (MCP) を使用して Backlog AP
 1. **MCP サーバー** (`src/index.ts`)
 
    - `@modelcontextprotocol/sdk` を使用して MCP サーバーを構築
-   - 10 個のツールを登録（課題取得、コメント取得、課題作成・更新など）
+   - 5 個のツールを登録（課題取得、コメント取得、添付ファイル取得など）
    - StdioServerTransport を使用して AI エージェントとの通信を確立
 
 2. **Backlog API クライアント** (`src/client.ts`)
@@ -38,20 +38,6 @@ Backlog MCP Server は、Model Context Protocol (MCP) を使用して Backlog AP
 - ✅ `get_issue_attachment`: 課題の添付ファイルを Base64 エンコードでダウンロード
 - ✅ `get_issue_shared_files`: 課題の共有ファイル一覧を取得
 
-### 課題管理
-
-- ✅ `add_issue`: 新しい課題を作成
-- ✅ `update_issue`: 既存の課題を更新
-
-### コメント管理
-
-- ✅ `add_comment`: 課題にコメントを追加
-- ✅ `update_comment`: 既存のコメントを更新
-
-### プロジェクト情報
-
-- ✅ `get_project_issue_types`: プロジェクトの種別一覧を取得
-
 ## 技術スタック
 
 - **言語**: TypeScript
@@ -64,9 +50,9 @@ Backlog MCP Server は、Model Context Protocol (MCP) を使用して Backlog AP
 
 ## 環境変数
 
-- `BACKLOG_API_TOKEN`: Backlog API の認証トークン（必須）
-- `BACKLOG_SPACE`: Backlog のスペース ID（必須）
-  - 例: `https://your-space.backlog.jp` の場合、`your-space` を指定
+- `BACKLOG_API_KEY`: Backlog API の認証トークン（必須）
+- `BACKLOG_DOMAIN`: Backlog のドメイン（必須）
+  - 例: `https://your-space.backlog.jp` の場合、`your-space.backlog.jp` を指定
 
 ## 使用方法
 
@@ -81,16 +67,15 @@ Backlog MCP Server は、Model Context Protocol (MCP) を使用して Backlog AP
         "get_issue_comments",
         "get_issue_attachments",
         "get_issue_attachment",
-        "get_issue_shared_files",
-        "get_project_issue_types"
+        "get_issue_shared_files"
       ],
       "disabled": false,
       "timeout": 60,
       "command": "npx",
       "args": ["-y", "https://github.com/pj8/backlog-mcp-server"],
       "env": {
-        "BACKLOG_API_TOKEN": "****",
-        "BACKLOG_SPACE": "your-space-here"
+        "BACKLOG_API_KEY": "****",
+        "BACKLOG_DOMAIN": "your-space-here.backlog.jp"
       },
       "transportType": "stdio"
     }
@@ -127,7 +112,7 @@ try {
 ### API クライアントの初期化
 
 ```typescript
-const baseURL = `https://${space}.backlog.jp`;
+const baseURL = domain.startsWith("http") ? domain : `https://${domain}`;
 this.client = axios.create({
   baseURL,
   params: {
