@@ -9,17 +9,7 @@ import type {
   GetIssueAttachmentParams,
   GetIssueAttachmentResponse,
   GetIssueSharedFilesParams,
-  GetIssueSharedFilesResponse,
-  AddIssueParams,
-  AddIssueResponse,
-  UpdateIssueParams,
-  UpdateIssueResponse,
-  AddCommentParams,
-  AddCommentResponse,
-  UpdateCommentParams,
-  UpdateCommentResponse,
-  GetProjectIssueTypesParams,
-  GetProjectIssueTypesResponse
+  GetIssueSharedFilesResponse
 } from './types.js';
 
 export class BacklogClient {
@@ -129,82 +119,4 @@ export class BacklogClient {
     }
   }
 
-  /**
-   * 課題を追加する
-   */
-  async addIssue(params: AddIssueParams): Promise<AddIssueResponse> {
-    try {
-      const response = await this.client.post('/api/v2/issues', params);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        throw new Error(`Backlog API Error: ${error.response?.status} - ${error.response?.statusText}`);
-      }
-      throw error;
-    }
-  }
-
-  /**
-   * 課題を更新する
-   */
-  async updateIssue(params: UpdateIssueParams): Promise<UpdateIssueResponse> {
-    try {
-      const { issueIdOrKey, ...updateParams } = params;
-      const response = await this.client.patch(`/api/v2/issues/${issueIdOrKey}`, updateParams);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        throw new Error(`Backlog API Error: ${error.response?.status} - ${error.response?.statusText}`);
-      }
-      throw error;
-    }
-  }
-
-  /**
-   * 課題にコメントを追加する
-   */
-  async addComment(params: AddCommentParams): Promise<AddCommentResponse> {
-    try {
-      const { issueIdOrKey, ...commentParams } = params;
-      const response = await this.client.post(`/api/v2/issues/${issueIdOrKey}/comments`, commentParams);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        throw new Error(`Backlog API Error: ${error.response?.status} - ${error.response?.statusText}`);
-      }
-      throw error;
-    }
-  }
-
-  /**
-   * 課題のコメントを更新する
-   */
-  async updateComment(params: UpdateCommentParams): Promise<UpdateCommentResponse> {
-    try {
-      const { issueIdOrKey, commentId, content } = params;
-      const response = await this.client.patch(`/api/v2/issues/${issueIdOrKey}/comments/${commentId}`, { content });
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        throw new Error(`Backlog API Error: ${error.response?.status} - ${error.response?.statusText}`);
-      }
-      throw error;
-    }
-  }
-
-  /**
-   * プロジェクトの種別一覧を取得する
-   */
-  async getProjectIssueTypes(params: GetProjectIssueTypesParams): Promise<GetProjectIssueTypesResponse> {
-    try {
-      const { projectIdOrKey } = params;
-      const response = await this.client.get(`/api/v2/projects/${projectIdOrKey}/issueTypes`);
-      return { issueTypes: response.data };
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        throw new Error(`Backlog API Error: ${error.response?.status} - ${error.response?.statusText}`);
-      }
-      throw error;
-    }
-  }
 }
