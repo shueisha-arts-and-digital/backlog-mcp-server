@@ -8,16 +8,13 @@
 
 ## 機能
 
-- [x] [課題情報の取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-issue/)
-- [x] [課題コメントの取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-comment-list/)
-- [x] [課題添付ファイルのダウンロード](https://developer.nulab.com/ja/docs/backlog/api/2/get-issue-attachment/)
-- [x] [課題添付ファイル一覧の取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-list-of-issue-attachments/)
-- [x] [課題共有ファイル一覧の取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-list-of-linked-shared-files/)
+- [課題情報の取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-issue/)
+- [課題コメントの取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-comment-list/)
+- [課題添付ファイルのダウンロード](https://developer.nulab.com/ja/docs/backlog/api/2/get-issue-attachment/)
+- [課題添付ファイル一覧の取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-list-of-issue-attachments/)
+- [課題共有ファイル一覧の取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-list-of-linked-shared-files/)
 
 ## Install
-
-- VSCode > CLINE > MCP Servers 設定画面 > Configure MCP Servers
-  <img width="1064" alt="Screenshot 2025-04-18 at 11 56 28" src="https://github.com/user-attachments/assets/783b72a0-ba0f-4769-8222-d5754d48573d" />
 
 - 下記のように backlog-mcp-server の設定を追加します。
   - BACKLOG_API_KEY は、https://your-space.backlog.jp/EditApiSettings.action
@@ -38,7 +35,10 @@
       "disabled": false,
       "timeout": 60,
       "command": "npx",
-      "args": ["-y", "https://github.com/pj8/backlog-mcp-server"],
+      "args": [
+        "-y",
+        "https://github.com/shueisha-arts-and-digital/backlog-mcp-server"
+      ],
       "env": {
         "BACKLOG_DOMAIN": "your-space.backlog.jp",
         "BACKLOG_API_KEY": "****"
@@ -48,7 +48,3 @@
   }
 }
 ```
-
-## 使い方
-
-- CLINE に Backlog 課題 URL を与えて概要を説明させるなど
