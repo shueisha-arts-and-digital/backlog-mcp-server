@@ -72,7 +72,10 @@ Backlog MCP Server は、Model Context Protocol (MCP) を使用して Backlog AP
       "disabled": false,
       "timeout": 60,
       "command": "npx",
-      "args": ["-y", "https://github.com/pj8/backlog-mcp-server"],
+      "args": [
+        "-y",
+        "https://github.com/shueisha-arts-and-digital/backlog-mcp-server"
+      ],
       "env": {
         "BACKLOG_API_KEY": "****",
         "BACKLOG_DOMAIN": "your-space-here.backlog.jp"
