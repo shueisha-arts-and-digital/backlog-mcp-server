@@ -25,6 +25,7 @@ const server = new McpServer({
 // 課題情報取得ツールを追加
 server.tool(
   "get_issue",
+  "Retrieves detailed information about an issue. You can specify an issue ID or issue key to get details such as title, description, status, assignee, and more.",
   {
     issueIdOrKey: z.string().describe("課題のID または 課題キー"),
   },
@@ -52,6 +53,7 @@ server.tool(
 // 課題コメント取得ツールを追加
 server.tool(
   "get_issue_comments",
+  "Retrieves a list of comments for an issue. Supports pagination with options to specify comment ID ranges and the number of results to retrieve.",
   {
     issueIdOrKey: z.string().describe("課題のID または 課題キー"),
     minId: z.number().optional().describe("最小コメントID"),
@@ -89,6 +91,7 @@ server.tool(
 // 課題添付ファイル一覧取得ツールを追加
 server.tool(
   "get_issue_attachments",
+  "Retrieves a list of files attached to an issue. Returns metadata such as file name, size, and ID.",
   {
     issueIdOrKey: z.string().describe("課題のID または 課題キー"),
   },
@@ -116,6 +119,7 @@ server.tool(
 // 課題添付ファイルダウンロードツールを追加
 server.tool(
   "get_issue_attachment",
+  "Downloads an attachment file from an issue in Base64-encoded format. Use this to retrieve the actual file content.",
   {
     issueIdOrKey: z.string().describe("課題のID または 課題キー"),
     attachmentId: z.string().describe("添付ファイルID"),
@@ -147,6 +151,7 @@ server.tool(
 // 課題共有ファイル一覧取得ツールを追加
 server.tool(
   "get_issue_shared_files",
+  "Retrieves a list of shared files associated with an issue. Shared files are files that are shared within the project.",
   {
     issueIdOrKey: z.string().describe("課題のID または 課題キー"),
   },
